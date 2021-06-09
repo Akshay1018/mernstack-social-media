@@ -1,10 +1,21 @@
 import React from 'react'
-
+import Register from './components/Register.js';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 function App() {
     return (
-        <div>
-            <h1>Social media</h1>
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path='/' component={Register} />
+                <Route component={
+                    () => (
+                        <h1>Not Found.
+                                Go Back <Link to='/'>Home Page</Link>
+                        </h1>
+                    )
+                } />
+            </Switch>
+        </Router>
+
     )
 }
 
