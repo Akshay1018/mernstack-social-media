@@ -1,11 +1,13 @@
 import React from 'react'
 import Register from './components/Register.js';
+import Login from './components/Login'
 import { Route, BrowserRouter as Router, Switch ,Link} from 'react-router-dom';
 function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path='/' component={Register} />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
                 <Route component={
                     () => (
                         <h1>Not Found.
