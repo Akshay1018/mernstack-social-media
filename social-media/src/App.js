@@ -1,6 +1,6 @@
 import React from 'react'
 import Register from './components/Register.js';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch ,Link} from 'react-router-dom';
 function App() {
     return (
         <Router>
