@@ -8,7 +8,7 @@ export const getPosts = ()=>async(dispatch)=>{
     const res = await axios.get('http://localhost:5000/api/user/getposts');
     dispatch({
         type:FETCH_ALL,
-        payload:res
+        payload:res.data
     })
     } catch (err) {
         console.log(err);
