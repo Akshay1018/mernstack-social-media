@@ -3,9 +3,9 @@ const reducer = (state = [], action) => {
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':
-            return state;
+            return [...state,action.payload];
         default:
-            return state;
+            return state; 
     }
 }
 export default reducer
