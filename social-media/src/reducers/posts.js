@@ -1,10 +1,11 @@
-const reducer = (stste,action) =>{
-    switch(action.type){
+const reducer = (state = [], action) => {
+    switch (action.type) {
         case 'FETCH_ALL':
-
+            return action.payload;
         case 'CREATE':
-
+            return state;
         default:
-            break;
+            return state;
     }
 }
+export default reducer
