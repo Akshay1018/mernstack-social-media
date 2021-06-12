@@ -1,6 +1,7 @@
 import React from 'react'
-
-function post() {
+import useStyles from '../styles'
+function Post() {
+    const classes = useStyles();
     return (
         <div>
             <h1>post</h1>
@@ -8,4 +9,4 @@ function post() {
     )
 }
 
-export default post
+export default Post;

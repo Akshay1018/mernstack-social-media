@@ -3,20 +3,22 @@ import React from 'react'
 import { AppBar, Typography, Container, Grow, Grid } from '@material-ui/core';
 import memories from './components/images/memory.jpg';
 import Posts from './components/posts';
-import Form from './components/form'
+import Form from './components/form';
+import useStyles from './styles';
 // import Register from './components/Register.js';
 // import Login from './components/Login'
 // import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 function App() {
+    const classes = useStyles()
     return (
         <Container maxWidth="lg">
-            <AppBar position="static" color="inherit">
-                <Typography variant="h2" align='center'>
+            <AppBar className = {classes.appBar} position="static" color="inherit">
+                <Typography className = {classes.heading} variant="h2" align='center'>
 
 
                     Along the Way…
                </Typography>
-                <img src={memories} alt='memories' height='60' />
+                <img className = {classes.image} src={memories} alt='memories' height='60' />
 
             </AppBar>
             <Grow in>

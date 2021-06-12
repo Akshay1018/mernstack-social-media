@@ -1,6 +1,7 @@
 import React from 'react'
-
-function form() {
+import useStyles from '../styles'
+function Form() {
+    const classes = useStyles()
     return (
         <div>
                 <h1>
@@ -10,4 +11,4 @@ function form() {
     )
 }
 
-export default form
+export default Form
