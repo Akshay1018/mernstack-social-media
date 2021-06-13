@@ -5,10 +5,14 @@ const reducer = (posts = [], action) => {
         case 'CREATE':
             return {
                 ...posts,
-                posts:action.payload
+                posts: action.payload
             }
+        case 'UPDATE':
+            return posts.map((post) => post._id === action.payload._id ? action.payload : post)
+               
+            
         default:
-            return posts; 
+            return posts;
     }
 }
 export default reducer

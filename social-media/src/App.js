@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { AppBar, Typography, Container, Grow, Grid } from '@material-ui/core';
 import {getPosts} from './actions/posts'
@@ -6,12 +6,15 @@ import memories from './components/images/memory.jpg';
 import Posts from './components/posts';
 import Form from './components/form';
 import useStyles from './styles';
+
 // import Register from './components/Register.js';
 // import Login from './components/Login'
 // import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 function App() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const [currentId,setcurrentId] = useState(null);
+
 
     useEffect(() => {
         dispatch(getPosts());
@@ -31,10 +34,10 @@ function App() {
                 <Container>
                     <Grid container justify='space-between' alignItems='stretch' spacing={3}>
                         <Grid item xs={12} sm={7}>
-                            <Posts />
+                            <Posts setcurrentId={setcurrentId}/>
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Form />
+                            <Form currentId = {currentId} setcurrentId={setcurrentId} />
                         </Grid>
 
                     </Grid>

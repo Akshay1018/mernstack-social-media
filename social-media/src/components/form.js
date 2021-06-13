@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Paper, Typography, Button, TextField } from '@material-ui/core'
 import useStyles from '../styles'
 import FileBase from 'react-file-base64';
-import {useDispatch} from 'react-redux'
-import { createPost } from '../actions/posts';
-function Form() {
+import { useDispatch } from 'react-redux'
+import { createPost, updatepost } from '../actions/posts';
+function Form({ currentId, setcurrentId }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [postData, setPostData] = useState({
@@ -16,9 +16,15 @@ function Form() {
     })
     const onsubmit = (e) => {
         e.preventDefault();
-        dispatch(createPost(postData));
+        if (currentId) {
+            dispatch(updatepost(currentId, postData));
+
+        } else {
+            dispatch(createPost(postData));
+
+        }
     }
-    const clear = ()=>{
+    const clear = () => {
 
     }
     return (
@@ -72,9 +78,9 @@ function Form() {
                         onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                     />
                 </div>
-                <Button className = {classes.buttonSubmit} variant='contained' color ="primary" size="large" type='submit' fullWidth>Submit</Button>
+                <Button className={classes.buttonSubmit} variant='contained' color="primary" size="large" type='submit' fullWidth>Submit</Button>
 
-                <Button  variant='contained' color ="secondary" size="small" onClick = {clear} fullWidth>Clear</Button>
+                <Button variant='contained' color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
 
             </form>
 

@@ -6,7 +6,7 @@ import Deleteicon from '@material-ui/icons/Delete';
 import HorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 
-function Post({ post }) {
+function Post({ post, setcurrentId }) {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -18,7 +18,9 @@ function Post({ post }) {
 
             </div>
             <div className={classes.overlay2}>
-                <Button style={{ color: 'white' }} size='small' onClick={() => { }}>
+                <Button style={{ color: 'white' }} size='small'
+                    onClick={() => setcurrentId(post._id)}
+                >
                     <HorizIcon fontSize='default' />
                 </Button>
 
@@ -30,16 +32,16 @@ function Post({ post }) {
                 <Typography className={classes.title} variant='h5' gutterBottom>{post.message}</Typography>
 
             </CardContent>
-            <CardActions className = {classes.cardActions}>
-                <Button size = 'small' color = 'primary' onClick = {()=>{}}>
-                    <ThumbUpAltIcon fontSize = 'small'/>
+            <CardActions className={classes.cardActions}>
+                <Button size='small' color='primary' onClick={() => { }}>
+                    <ThumbUpAltIcon fontSize='small' />
                     Like
                     {post.likeCount}
                 </Button>
-                <Button size = 'small' color = 'primary' onClick = {()=>{}}>
-                    <Deleteicon fontSize = 'small'/>
+                <Button size='small' color='primary' onClick={() => { }}>
+                    <Deleteicon fontSize='small' />
                     Delete
-                    
+
                 </Button>
 
             </CardActions>
