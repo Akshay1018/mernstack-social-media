@@ -9,19 +9,21 @@ export const getPosts = () => async (dispatch) => {
         dispatch({
             type: FETCH_ALL,
             payload: res
-        })
+        });
+        console.log(res);
     } catch (err) {
         console.log(err);
     }
 }
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (postm) => async (dispatch) => {
     try {
-        const {data} = await axios.post('http://localhost:5000/api/user/createpost', post);
+        const {data} = await axios.post('http://localhost:5000/api/user/createpost', postm);
         dispatch({
             type: CREATE,
             payload: data   
         })
+        console.log(data);
     } catch (err) {
         console.log(err);
     }
