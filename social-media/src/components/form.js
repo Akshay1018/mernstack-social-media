@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Paper, Typography, Button, TextField } from '@material-ui/core'
 import useStyles from '../styles'
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatepost } from '../actions/posts';
+
 function Form({ currentId, setcurrentId }) {
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null)
     const classes = useStyles();
     const dispatch = useDispatch();
     const [postData, setPostData] = useState({
@@ -14,29 +16,41 @@ function Form({ currentId, setcurrentId }) {
         tags: '',
         selectedFile: ''
     })
+    useEffect(() => {
+        if (post) setPostData(post)
+    }, [post])
     const onsubmit = (e) => {
         e.preventDefault();
         if (currentId) {
             dispatch(updatepost(currentId, postData));
+            clear();
 
         } else {
             dispatch(createPost(postData));
+            clear();
 
         }
     }
     const clear = () => {
-
+            setcurrentId(null);
+            setPostData({
+                creator: '',
+                title: '',
+                message: '',
+                tags: '',
+                selectedFile: ''
+            })
     }
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.form} ${classes.root}`} onSubmit={onsubmit}>
-                <Typography variant="h5" > Creating a Memory</Typography>
+                <Typography variant="h5" >{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
                 <TextField
-                    name="creater"
+                    name="creator"
                     variant='outlined'
                     label="Creator"
                     fullWidth
-                    value={postData.creater}
+                    value={postData.creator}
                     onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
                 />
                 <TextField

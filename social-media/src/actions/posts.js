@@ -1,5 +1,5 @@
 
-import { CREATE, FETCH_ALL, UPDATE } from '../types'
+import { CREATE, DELETE, FETCH_ALL, UPDATE } from '../types'
 import axios from 'axios';
 
 
@@ -35,6 +35,18 @@ export const updatepost = (id, postData) => async (dispatch) => {
         dispatch({
             type: UPDATE,
             payload: data
+        })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const deletePost = (id) => async (dispatch) => {
+    try {
+        await axios.delete(`http://localhost:5000/api/user/deletepost/${id}`);
+        dispatch({
+            type: DELETE,
+            payload: id
         })
     } catch (err) {
         console.log(err);
