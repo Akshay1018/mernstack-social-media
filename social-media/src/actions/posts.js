@@ -5,12 +5,12 @@ import axios from 'axios';
 
 export const getPosts = () => async (dispatch) => {
     try {
-        const res = await axios.get('http://localhost:5000/api/user/getposts');
+        const {data} = await axios.get('http://localhost:5000/api/user/getposts');
         dispatch({
             type: FETCH_ALL,
-            payload: res
+            payload: data
         });
-        console.log(res);
+        console.log(data);
     } catch (err) {
         console.log(err);
     }
