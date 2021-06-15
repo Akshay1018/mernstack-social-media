@@ -5,10 +5,10 @@ const reducer = (posts = [], action) => {
         case FETCH_ALL:
             return action.payload;
         case CREATE:
-            return {
+            return [
                 ...posts,
-                posts: action.payload
-            }
+                 action.payload
+            ]
         case UPDATE:
             return posts.map((post) => post._id === action.payload._id ? action.payload : post)
 

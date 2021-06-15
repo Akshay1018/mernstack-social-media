@@ -2,60 +2,61 @@
 import { CREATE, DELETE, FETCH_ALL, UPDATE,LIKE_POST} from '../types'
 import axios from 'axios';
 
-
 export const getPosts = () => async (dispatch) => {
     try {
-        const { data } = await axios.get('http://localhost:5000/api/user/getposts');
+        const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts');
         dispatch({
             type: FETCH_ALL,
             payload: data
         });
-        console.log(data);
+    
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 }
 
 export const createPost = (postm) => async (dispatch) => {
     try {
-        const { data } = await axios.post('http://localhost:5000/api/user/createpost', postm);
+        const { data } = await axios.post('https://intense-reaches-30417.herokuapp.com/api/user/createpost', postm);
         dispatch({
             type: CREATE,
             payload: data
         })
-        console.log(data);
+        getPosts()
+       
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 }
 
 export const updatepost = (id, postData) => async (dispatch) => {
     try {
-        const { data } = await axios.patch(`http://localhost:5000/api/user/updatepost/${id}`, postData);
+        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/updatepost/${id}`, postData);
         dispatch({
             type: UPDATE,
             payload: data
         })
+   
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 }
 
 export const deletePost = (id) => async (dispatch) => {
     try {
-        await axios.delete(`http://localhost:5000/api/user/deletepost/${id}`);
+        await axios.delete(`https://intense-reaches-30417.herokuapp.com/api/user/deletepost/${id}`);
         dispatch({
             type: DELETE,
             payload: id
         })
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 }
 
 export const likePost = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.patch(`http://localhost:5000/api/user/${id}/likepost`);
+        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/${id}/likepost`);
         dispatch({
             type: LIKE_POST,
             payload: data

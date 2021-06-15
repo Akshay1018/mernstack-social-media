@@ -11,23 +11,24 @@ import useStyles from './styles';
 // import Login from './components/Login'
 // import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 function App() {
+    const [currentId, setcurrentId] = useState(null);
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [currentId, setcurrentId] = useState(null);
+   
 
 
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch])
+    }, [currentId,dispatch])
     return (
         <Container maxWidth="lg">
-            <AppBar className={classes.appBar} position="static" color="inherit">
+            <AppBar className={classes.appBar} position="static" color="transparent">
                 <Typography className={classes.heading} variant="h2" align='center'>
 
 
                     Memoir
                 </Typography>
-                <img className={classes.image} src={memories} alt='memories' height='60' />
+                <img className={classes.image} src={memories} alt='memories' height='60'  />
 
             </AppBar>
             <Grow in>
