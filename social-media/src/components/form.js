@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatepost } from '../actions/posts';
 
 function Form({ currentId, setcurrentId }) {
-    const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
     const [postData, setPostData] = useState({
@@ -30,9 +30,6 @@ function Form({ currentId, setcurrentId }) {
         } else {
             dispatch(createPost(postData));
             clear();
-
-
-
         }
     }
     const clear = () => {
