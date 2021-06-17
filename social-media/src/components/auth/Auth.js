@@ -1,19 +1,20 @@
-import React from 'react'
-import { Avatar, Container, Button, Grid, Paper, Typography } from "@material-ui/core"
-import useStyles from './styles'
-import LockIcon from '@material-ui/icons/LockOutlined'
-import { GoogleLogin } from 'react-google-login'
+import React from 'react';
+import { Avatar, Container, Button, Grid, Paper, Typography } from "@material-ui/core";
+import useStyles from './styles';
+import LockIcon from '@material-ui/icons/LockOutlined';
+import { GoogleLogin } from 'react-google-login';
 import Input from './Input';
 import { useState } from 'react';
-import Icon from './Icon'
-import {useDispatch} from 'react-redux'
+import Icon from './Icon';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 function Auth() {
     const classes = useStyles();
     const [isSignUp, setisSignup] = useState(false);
 
     const [showPassword, setshowPassword] = useState(false);
     const dispatch = useDispatch()
-
+    const history = useHistory();
     const onsubmit = () => {
 
     }
@@ -30,19 +31,20 @@ function Auth() {
         setshowPassword((prev) => !prev)
     }
 
-    const googleSuccess = async(res)=>{
+    const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const token = res?.tokenId;
         try {
             dispatch({
-                type :"AUTH",
-                data :{result,token}
+                type: "AUTH",
+                data: { result, token }
             })
+            history.push('/')
         } catch (err) {
             console.log(err);
         }
     }
-    const googleFailure = (err) =>{
+    const googleFailure = (err) => {
         console.log(err);
         console.log("Unsuccessful Sign in");
     }
@@ -83,15 +85,15 @@ function Auth() {
                                 disabled={renderProps.disabled}
                                 startIcon={<Icon />}
                                 variant='contained'
-                                >
-                                    Sign in with Google
-                                </Button>
+                            >
+                                Sign in with Google
+                            </Button>
                         )}
                         onSuccess={googleSuccess}
                         onFailure={googleFailure}
                         cookiePolicy="single_host_origin"
                     />
-                
+
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Button onClick={switchMode}>
