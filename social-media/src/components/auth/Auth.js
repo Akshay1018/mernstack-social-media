@@ -6,11 +6,13 @@ import { GoogleLogin } from 'react-google-login'
 import Input from './Input';
 import { useState } from 'react';
 import Icon from './Icon'
+import {useDispatch} from 'react-redux'
 function Auth() {
     const classes = useStyles();
     const [isSignUp, setisSignup] = useState(false);
 
     const [showPassword, setshowPassword] = useState(false);
+    const dispatch = useDispatch()
 
     const onsubmit = () => {
 
@@ -29,7 +31,16 @@ function Auth() {
     }
 
     const googleSuccess = async(res)=>{
-        console.log(res);
+        const result = res?.profileObj;
+        const token = res?.tokenId;
+        try {
+            dispatch({
+                type :"AUTH",
+                data :{result,token}
+            })
+        } catch (err) {
+            console.log(err);
+        }
     }
     const googleFailure = (err) =>{
         console.log(err);
