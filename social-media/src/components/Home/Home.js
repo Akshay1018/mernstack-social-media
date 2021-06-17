@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react'
-import {Container, Grid,Grow} from '@material-ui/core';
+import React, { useState, useEffect } from 'react'
+import { Container, Grid, Grow } from '@material-ui/core';
 import Posts from '../posts';
 import Form from '../form';
 import { getPosts } from '../../actions/posts'
@@ -7,30 +7,27 @@ import { useDispatch } from 'react-redux';
 
 function Home() {
     const [currentId, setcurrentId] = useState(null);
-   
     const dispatch = useDispatch();
-   
-
 
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch])
+    }, [currentId, dispatch])
     return (
-        <div>
-             <Grow in>
-                <Container>
-                    <Grid  container  justify='space-between' alignItems='stretch' spacing={3}>
-                        <Grid item xs={12} sm={7}>
-                            <Posts setcurrentId={setcurrentId} />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <Form currentId={currentId} setcurrentId={setcurrentId} />
-                        </Grid>
 
+        <Grow in>
+            <Container>
+                <Grid container justify='space-between' alignItems='stretch' spacing={3}>
+                    <Grid item xs={12} sm={7}>
+                        <Posts setcurrentId={setcurrentId} />
                     </Grid>
-                </Container>
-            </Grow>
-        </div>
+                    <Grid item xs={12} sm={4}>
+                        <Form currentId={currentId} setcurrentId={setcurrentId} />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        </Grow>
+
     )
 }
 
