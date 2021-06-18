@@ -8,19 +8,24 @@ import { useState } from 'react';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+
 function Auth() {
+    const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
     const classes = useStyles();
     const [isSignUp, setisSignup] = useState(false);
-
+    const [formData, setformData] = useState(initialState);
     const [showPassword, setshowPassword] = useState(false);
     const dispatch = useDispatch()
     const history = useHistory();
-    const onsubmit = () => {
-
+    const onsubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
     }
 
-    const onchange = () => {
+    const handleChange = (e) => {
 
+        setformData({ ...formData, [e.target.name]: e.target.value })
     }
     const switchMode = () => {
         setisSignup((prevSIgnup) => !prevSIgnup);
@@ -60,15 +65,15 @@ function Auth() {
                         {
                             isSignUp && (
                                 <>
-                                    <Input name="firstname" label="First Name" handleChange={onchange} autoFocus half />
-                                    <Input name="lastname" label="Last Name" handleChange={onchange} half />
+                                    <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
+                                    <Input name="lastName" label="Last Name" handleChange={handleChange} half />
 
                                 </>
                             )
                         }
-                        <Input name='email' label="Email Address" handleChange={onchange} type='email' />
-                        <Input name='password' label="Password" handlepassword={handlepassword} type={showPassword ? 'text' : 'password'} />
-                        {isSignUp && <Input name="confirmpassword" label="Repeat password" handleChange={onchange} type='password' />}
+                        <Input name='email' label="Email Address" handleChange={handleChange} type='email' />
+                        <Input name='password' label="Password" handleChange={handleChange} handlepassword={handlepassword} type={showPassword ? 'text' : 'password'} />
+                        {isSignUp && <Input name="confirmPassword" label="Repeat password" handleChange={handleChange} type='password' />}
 
                     </Grid>
                     <Button type='submit' fullWidth variant="contained" color='primary' className={classes.submit}>

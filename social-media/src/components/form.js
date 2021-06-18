@@ -78,14 +78,7 @@ function Form({ currentId, setcurrentId }) {
                     value={postData.tags}
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
                 />
-                {/* <TextField
-                    name="selectedFile"
-                    variant='outlined'
-                    label="Choose File"
-                    fullWidth
-                    value={postData.selectedFile}
-                    onChange={(e) => setPostData({ ...postData, selectedFile: e.target.value })}
-                /> */}
+           
                 <div className={classes.fileInput}>
                     <FileBase
                         type='file'
