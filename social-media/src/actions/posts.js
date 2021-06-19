@@ -1,8 +1,12 @@
 
 import { CREATE, DELETE, FETCH_ALL, UPDATE,LIKE_POST} from '../types'
 import axios from 'axios';
+import AuthToken from '../AuthToken.js';
 
 export const getPosts = () => async (dispatch) => {
+    if(localStorage.token){
+        AuthToken(localStorage.token);
+    }
     try {
         const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts');
         dispatch({
@@ -16,6 +20,9 @@ export const getPosts = () => async (dispatch) => {
 }
 
 export const createPost = (postm) => async (dispatch) => {
+    if(localStorage.token){
+        AuthToken(localStorage.token);
+    }
     try {
         const { data } = await axios.post('https://intense-reaches-30417.herokuapp.com/api/user/createpost', postm);
         dispatch({
@@ -30,6 +37,9 @@ export const createPost = (postm) => async (dispatch) => {
 }
 
 export const updatepost = (id, postData) => async (dispatch) => {
+    if(localStorage.token){
+        AuthToken(localStorage.token);
+    }
     try {
         const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/updatepost/${id}`, postData);
         dispatch({
@@ -43,6 +53,9 @@ export const updatepost = (id, postData) => async (dispatch) => {
 }
 
 export const deletePost = (id) => async (dispatch) => {
+    if(localStorage.token){
+        AuthToken(localStorage.token);
+    }
     try {
         await axios.delete(`https://intense-reaches-30417.herokuapp.com/api/user/deletepost/${id}`);
         dispatch({
@@ -55,6 +68,9 @@ export const deletePost = (id) => async (dispatch) => {
 }
 
 export const likePost = (id) => async (dispatch) => {
+    if(localStorage.token){
+        AuthToken(localStorage.token);
+    }
     try {
         const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/${id}/likepost`);
         dispatch({

@@ -8,7 +8,7 @@ import { useState } from 'react';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import {SignIn,SignUp} from '../../actions/auth';
 
 function Auth() {
     const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
@@ -20,6 +20,13 @@ function Auth() {
     const history = useHistory();
     const onsubmit = (e) => {
         e.preventDefault();
+        if(isSignUp){
+            dispatch(SignUp(formData,history))
+        }else{
+            dispatch(SignIn(formData,history))
+
+        }
+
         console.log(formData);
     }
 
@@ -29,10 +36,10 @@ function Auth() {
     }
     const switchMode = () => {
         setisSignup((prevSIgnup) => !prevSIgnup);
-        handlepassword(false)
+        setshowPassword(false)
     }
 
-    const handlepassword = () => {
+    const handleshowpassword = () => {
         setshowPassword((prev) => !prev)
     }
 
@@ -72,7 +79,7 @@ function Auth() {
                             )
                         }
                         <Input name='email' label="Email Address" handleChange={handleChange} type='email' />
-                        <Input name='password' label="Password" handleChange={handleChange} handlepassword={handlepassword} type={showPassword ? 'text' : 'password'} />
+                        <Input name='password' label="Password" handleChange={handleChange} handleshowpassword={handleshowpassword} type={showPassword ? 'text' : 'password'} />
                         {isSignUp && <Input name="confirmPassword" label="Repeat password" handleChange={handleChange} type='password' />}
 
                     </Grid>

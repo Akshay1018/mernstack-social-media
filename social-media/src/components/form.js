@@ -9,8 +9,9 @@ function Form({ currentId, setcurrentId }) {
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('token'))
     const [postData, setPostData] = useState({
-        creator: '',
+
         title: '',
         message: '',
         tags: '',
@@ -25,35 +26,45 @@ function Form({ currentId, setcurrentId }) {
     const onsubmit = (e) => {
         e.preventDefault();
         if (currentId) {
-            dispatch(updatepost(currentId, postData));
+            dispatch(updatepost(currentId, { ...postData, name: user?.result?.name }));
             clear();
         } else {
-            dispatch(createPost(postData));
+            dispatch(createPost({ ...postData, name: user?.result?.name }));
             clear();
         }
     }
     const clear = () => {
         setcurrentId(null);
         setPostData({
-            creator: '',
+
             title: '',
             message: '',
             tags: '',
             selectedFile: ''
         })
     }
+
+    if (!user?.result?.name) {
+        return (
+            <Paper className={classes.paper}>
+                <Typography variant = "h6" align='center'>
+                Please signin to create your post and like other's posts
+                </Typography>
+            </Paper>
+        )
+    }
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form} `} onSubmit={onsubmit}>
                 <Typography variant="h5" >{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
-                <TextField
+                {/* <TextField
                     name="creator"
                     variant='outlined'
                     label="Creator"
                     fullWidth
                     value={postData.creator}
                     onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-                />
+                /> */}
                 <TextField
                     name="title"
                     variant='outlined'
@@ -78,7 +89,7 @@ function Form({ currentId, setcurrentId }) {
                     value={postData.tags}
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
                 />
-           
+
                 <div className={classes.fileInput}>
                     <FileBase
                         type='file'
