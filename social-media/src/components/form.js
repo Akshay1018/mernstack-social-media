@@ -9,7 +9,7 @@ function Form({ currentId, setcurrentId }) {
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
-    const user = JSON.parse(localStorage.getItem('token'))
+    const user = JSON.parse(localStorage.getItem('token'));
     const [postData, setPostData] = useState({
 
         title: '',
@@ -25,12 +25,16 @@ function Form({ currentId, setcurrentId }) {
 
     const onsubmit = (e) => {
         e.preventDefault();
-        if (currentId) {
+        if (currentId === 0) {
+
+            dispatch(createPost({ ...postData, name: user?.result?.name }));
+          
+            clear();
+          
+        } else {
             dispatch(updatepost(currentId, { ...postData, name: user?.result?.name }));
             clear();
-        } else {
-            dispatch(createPost({ ...postData, name: user?.result?.name }));
-            clear();
+           
         }
     }
     const clear = () => {
@@ -74,7 +78,7 @@ function Form({ currentId, setcurrentId }) {
                     onChange={(e) => setPostData({ ...postData, title: e.target.value })}
                 />
                 <TextField
-                    name="messge"
+                    name="message"
                     variant='outlined'
                     label="Message..."
                     fullWidth

@@ -3,11 +3,16 @@ import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
 export const SignIn = (formData, history) => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
-    }
+      const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    // if(localStorage.token){
+    //     AuthToken(localStorage.token);
+    // }
     try {
-        const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/authuser/signin`, formData);
+        const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/authuser/signin`, formData,config);
         dispatch({
             type: AUTH,
             data
@@ -19,11 +24,16 @@ export const SignIn = (formData, history) => async (dispatch) => {
 }
 
 export const SignUp = (formData, history) => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
-    }
+      const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    // if(localStorage.token){
+    //     AuthToken(localStorage.token);
+    // }
     try {
-        const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/authuser/signup`, formData);
+        const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/authuser/signup`, formData,config);
         dispatch({
             type: AUTH,
             data

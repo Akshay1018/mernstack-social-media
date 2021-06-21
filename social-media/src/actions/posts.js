@@ -1,63 +1,93 @@
 
-import { CREATE, DELETE, FETCH_ALL, UPDATE,LIKE_POST} from '../types'
+import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST } from '../types'
 import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
 export const getPosts = () => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    if (localStorage.token) {
+        let tok = ` ${JSON.parse(localStorage.getItem('token')).token}`;
+  
+        AuthToken(tok);
     }
     try {
-        const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts');
+        const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts',config);
         dispatch({
             type: FETCH_ALL,
             payload: data
         });
-    
+
     } catch (err) {
         console.log(err.message);
     }
 }
 
-export const createPost = (postm) => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
+export const createPost = (postm) => async (req,dispatch) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    if (localStorage.token) {
+        let tok = ` ${JSON.parse(localStorage.getItem('token')).token}`;
+     
+        AuthToken(tok);
     }
+    
     try {
-        const { data } = await axios.post('https://intense-reaches-30417.herokuapp.com/api/user/createpost', postm);
+        const { data } = await axios.post('https://intense-reaches-30417.herokuapp.com/api/user/createpost', postm, config);
+      
         dispatch({
             type: CREATE,
             payload: data
         })
-        getPosts()
-       
+      
+
     } catch (err) {
         console.log(err.message);
     }
 }
 
 export const updatepost = (id, postData) => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    if (localStorage.token) {
+        let tok = ` ${JSON.parse(localStorage.getItem('token')).token}`;
+      
+        AuthToken(tok);
     }
     try {
-        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/updatepost/${id}`, postData);
+        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/updatepost/${id}`, postData,config);
         dispatch({
             type: UPDATE,
             payload: data
         })
-   
+
     } catch (err) {
         console.log(err.message);
     }
 }
 
-export const deletePost = (id) => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
+export const deletePost = (id) => async (req,dispatch) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    if (localStorage.token) {
+        let tok = ` ${JSON.parse(localStorage.getItem('token')).token}`;
+     
+        AuthToken(tok);
     }
     try {
-        await axios.delete(`https://intense-reaches-30417.herokuapp.com/api/user/deletepost/${id}`);
+        await axios.delete(`https://intense-reaches-30417.herokuapp.com/api/user/deletepost/${id}`,config);
         dispatch({
             type: DELETE,
             payload: id
@@ -68,11 +98,19 @@ export const deletePost = (id) => async (dispatch) => {
 }
 
 export const likePost = (id) => async (dispatch) => {
-    if(localStorage.token){
-        AuthToken(localStorage.token);
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    let tok = `${JSON.parse(localStorage.getItem('token')).token}`;
+    if (localStorage.token) {
+      
+    
+        AuthToken(tok);
     }
     try {
-        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/${id}/likepost`);
+        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/${id}/likepost`,config,tok);
         dispatch({
             type: LIKE_POST,
             payload: data

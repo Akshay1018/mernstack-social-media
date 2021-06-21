@@ -6,7 +6,7 @@ import { getPosts } from '../../actions/posts'
 import { useDispatch } from 'react-redux';
 
 function Home() {
-    const [currentId, setcurrentId] = useState(null);
+    const [currentId, setcurrentId] = useState(0);
     const dispatch = useDispatch();
 
     useEffect(() => {
