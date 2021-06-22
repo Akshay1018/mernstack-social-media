@@ -16,7 +16,7 @@ const reducer = (posts = [], action) => {
             return posts.filter((post) => post._id !== action.payload)
 
         case LIKE_POST:
-            return posts.map((post) => post._id === action.payload._id ? action.payload : post)
+            return posts.map((post) => (post._id === action.payload._id ? action.payload : post))
         default:
             return posts;
     }

@@ -103,14 +103,16 @@ export const likePost = (id) => async (dispatch) => {
             "Content-Type": "application/json"
         }
     };
+   
     let tok = `${JSON.parse(localStorage.getItem('token')).token}`;
+  
     if (localStorage.token) {
-      
-    
         AuthToken(tok);
     }
     try {
-        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/${id}/likepost`,config,tok);
+      
+        const { data } = await axios.patch(`https://intense-reaches-30417.herokuapp.com/api/user/likepost/${id}`,config);
+       
         dispatch({
             type: LIKE_POST,
             payload: data
