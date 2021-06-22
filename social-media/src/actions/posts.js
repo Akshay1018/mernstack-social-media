@@ -45,6 +45,7 @@ export const createPost = (postm) => async (req,dispatch) => {
             type: CREATE,
             payload: data
         })
+        getPosts()
       
 
     } catch (err) {
@@ -92,6 +93,7 @@ export const deletePost = (id) => async (req,dispatch) => {
             type: DELETE,
             payload: id
         })
+        getPosts()
     } catch (err) {
         console.log(err.message);
     }

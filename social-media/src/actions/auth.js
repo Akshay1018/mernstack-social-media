@@ -8,9 +8,7 @@ export const SignIn = (formData, history) => async (dispatch) => {
             "Content-Type": "application/json"
         }
     };
-    // if(localStorage.token){
-    //     AuthToken(localStorage.token);
-    // }
+   
     try {
         const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/authuser/signin`, formData,config);
         dispatch({
@@ -29,9 +27,7 @@ export const SignUp = (formData, history) => async (dispatch) => {
             "Content-Type": "application/json"
         }
     };
-    // if(localStorage.token){
-    //     AuthToken(localStorage.token);
-    // }
+
     try {
         const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/authuser/signup`, formData,config);
         dispatch({

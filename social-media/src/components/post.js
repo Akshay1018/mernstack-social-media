@@ -41,7 +41,7 @@ const Post = ({ post, setcurrentId }) => {
 
                 <div className={classes.overlay2}>
                     <Button style={{ color: 'white' }} size='small'
-                        onClick={() => setcurrentId(post._id)}
+                        disabled={!user?.result} onClick={() => setcurrentId(post._id)}
                     >
                         <HorizIcon fontSize='default' />
                     </Button>
@@ -63,7 +63,7 @@ const Post = ({ post, setcurrentId }) => {
                     <Likes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size='small' color='primary' onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size='small' color='primary' disabled={!user?.result} onClick={() => dispatch(deletePost(post._id))}>
                         <Deleteicon fontSize='small' />
                         Delete
 

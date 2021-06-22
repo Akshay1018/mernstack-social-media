@@ -25,16 +25,17 @@ function Form({ currentId, setcurrentId }) {
 
     const onsubmit = (e) => {
         e.preventDefault();
-        if (currentId === 0) {
-
-            dispatch(createPost({ ...postData, name: user?.result?.name }));
-          
-            clear();
-          
-        } else {
+        if (currentId) {
             dispatch(updatepost(currentId, { ...postData, name: user?.result?.name }));
             clear();
-           
+
+
+        } else {
+            dispatch(createPost({ ...postData, name: user?.result?.name }));
+
+            clear();
+
+
         }
     }
     const clear = () => {
@@ -51,8 +52,8 @@ function Form({ currentId, setcurrentId }) {
     if (!user?.result?.name) {
         return (
             <Paper className={classes.paper}>
-                <Typography variant = "h6" align='center'>
-                Please signin to create your post and like other's posts
+                <Typography variant="h6" align='center'>
+                    Please signin to create your post and like other's posts
                 </Typography>
             </Paper>
         )
@@ -61,14 +62,7 @@ function Form({ currentId, setcurrentId }) {
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form} `} onSubmit={onsubmit}>
                 <Typography variant="h5" >{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
-                {/* <TextField
-                    name="creator"
-                    variant='outlined'
-                    label="Creator"
-                    fullWidth
-                    value={postData.creator}
-                    onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-                /> */}
+            
                 <TextField
                     name="title"
                     variant='outlined'

@@ -5,6 +5,7 @@ import memories from '../../components/images/memory.jpg';
 import { Link ,useHistory,useLocation} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../types';
+import decode from 'jwt-decode';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -12,8 +13,21 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
+
+    // const logout = () => {
+    //     dispatch({ type: actionType.LOGOUT });
+    
+    //     history.push('/auth');
+    
+    //     setUser(null);
+    //   };
+
     useEffect(() => {
-        // const token = user?.token;
+        const token = user?.token;
+        if(token){
+           
+            if (token.exp * 1000 < new Date().getTime()) logout();
+        }
         setUser(JSON.parse(localStorage.getItem('token')));
     }, [location]);
 
