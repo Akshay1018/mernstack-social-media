@@ -9,11 +9,7 @@ export const getPosts = () => async (dispatch) => {
             "Content-Type": "application/json"
         }
     };
-    if (localStorage.token) {
-        let tok = ` ${JSON.parse(localStorage.getItem('token')).token}`;
-  
-        AuthToken(tok);
-    }
+
     try {
         const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts',config);
         dispatch({
@@ -45,7 +41,7 @@ export const createPost = (postm) => async (req,dispatch) => {
             type: CREATE,
             payload: data
         })
-        getPosts()
+        
       
 
     } catch (err) {
@@ -93,13 +89,14 @@ export const deletePost = (id) => async (req,dispatch) => {
             type: DELETE,
             payload: id
         })
-        getPosts()
+      
     } catch (err) {
         console.log(err.message);
     }
 }
 
 export const likePost = (id) => async (dispatch) => {
+   
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -107,7 +104,7 @@ export const likePost = (id) => async (dispatch) => {
     };
    
     let tok = `${JSON.parse(localStorage.getItem('token')).token}`;
-  
+   
     if (localStorage.token) {
         AuthToken(tok);
     }

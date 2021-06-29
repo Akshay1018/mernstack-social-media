@@ -23,11 +23,11 @@ const Navbar = () => {
     //   };
 
     useEffect(() => {
-        const token = user?.token;
-        if(token){
+        // const token = user?.token;
+        // if(token){
            
-            if (token.exp * 1000 < new Date().getTime()) logout();
-        }
+        //     if (token.exp * 1000 < new Date().getTime()) logout();
+        // }
         setUser(JSON.parse(localStorage.getItem('token')));
     }, [location]);
 

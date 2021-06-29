@@ -8,22 +8,24 @@ import { useState } from 'react';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {SignIn,SignUp} from '../../actions/auth';
+import { SignIn, SignUp } from '../../actions/auth';
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-function Auth() {
-    const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const Auth = () => {
     const classes = useStyles();
     const [isSignUp, setisSignup] = useState(false);
     const [formData, setformData] = useState(initialState);
     const [showPassword, setshowPassword] = useState(false);
     const dispatch = useDispatch()
     const history = useHistory();
+
+
     const onsubmit = (e) => {
         e.preventDefault();
-        if(isSignUp){
-            dispatch(SignUp(formData,history))
-        }else{
-            dispatch(SignIn(formData,history))
+        if (isSignUp) {
+            dispatch(SignUp(formData, history))
+        } else {
+            dispatch(SignIn(formData, history))
 
         }
     }
@@ -56,7 +58,8 @@ function Auth() {
     }
     const googleFailure = (err) => {
         console.log(err);
-        console.log("Unsuccessful Sign in");
+        alert('Google Sign In was unsuccessful. Try again later');
+        // console.log("Unsuccessful Sign in");
     }
     return (
         <Container component="main" maxWidth="xs">

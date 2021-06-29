@@ -25,14 +25,13 @@ function Form({ currentId, setcurrentId }) {
 
     const onsubmit = (e) => {
         e.preventDefault();
-        if (currentId) {
-            dispatch(updatepost(currentId, { ...postData, name: user?.result?.name }));
-            clear();
-
-
-        } else {
+        if (currentId === 0) {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
 
+            clear();
+        
+        } else {
+            dispatch(updatepost(currentId, { ...postData, name: user?.result?.name }));
             clear();
 
 

@@ -13,7 +13,9 @@ const Post = ({ post, setcurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('token'));
-    const Likes = () => {
+
+   
+    const AllLikes = () => {
         if (post.likes.length > 0) {
             return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
                 ? (
@@ -41,7 +43,7 @@ const Post = ({ post, setcurrentId }) => {
 
                 <div className={classes.overlay2}>
                     <Button style={{ color: 'white' }} size='small'
-                        disabled={!user?.result} onClick={() => setcurrentId(post._id)}
+                      onClick={() => setcurrentId(post._id)}
                     >
                         <HorizIcon fontSize='default' />
                     </Button>
@@ -60,13 +62,12 @@ const Post = ({ post, setcurrentId }) => {
             <CardActions className={classes.cardActions}>
 
                 <Button size='small' color='primary' disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
-                    <Likes />
+                    <AllLikes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size='small' color='primary' disabled={!user?.result} onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size='small' color='primary'  onClick={() => dispatch(deletePost(post._id))}>
                         <Deleteicon fontSize='small' />
                         Delete
-
                     </Button>
                 )}
 
