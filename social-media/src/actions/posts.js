@@ -22,7 +22,7 @@ export const getPosts = () => async (dispatch) => {
     }
 }
 
-export const createPost = (postm) => async (req,dispatch) => {
+export const createPost = (postm) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"

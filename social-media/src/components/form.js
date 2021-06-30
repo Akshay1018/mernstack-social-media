@@ -5,48 +5,46 @@ import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatepost } from '../actions/posts';
 
-function Form({ currentId, setcurrentId }) {
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const user = JSON.parse(localStorage.getItem('token'));
+const Form = ({ currentId, setcurrentId }) => {
     const [postData, setPostData] = useState({
 
         title: '',
         message: '',
         tags: '',
         selectedFile: ''
-    })
+    });
+    const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('token'));
+
 
     useEffect(() => {
-        if (post) setPostData(post)
+        if (post) setPostData(post);
     }, [post]);
 
 
-    const onsubmit = (e) => {
+    const onsubmit = async(e) => {
         e.preventDefault();
         if (currentId === 0) {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
-
             clear();
-        
+
         } else {
             dispatch(updatepost(currentId, { ...postData, name: user?.result?.name }));
             clear();
-
-
         }
-    }
+       
+    };
     const clear = () => {
-        setcurrentId(null);
+        setcurrentId(0);
         setPostData({
-
             title: '',
             message: '',
             tags: '',
             selectedFile: ''
-        })
-    }
+        });
+    };
 
     if (!user?.result?.name) {
         return (
@@ -55,13 +53,13 @@ function Form({ currentId, setcurrentId }) {
                     Please signin to create your post and like other's posts
                 </Typography>
             </Paper>
-        )
+        );
     }
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form} `} onSubmit={onsubmit}>
                 <Typography variant="h5" >{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
-            
+
                 <TextField
                     name="title"
                     variant='outlined'

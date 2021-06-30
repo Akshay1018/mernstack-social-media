@@ -9,6 +9,8 @@ import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SignIn, SignUp } from '../../actions/auth';
+import { AUTH } from '../../types';
+import AuthToken from '../../AuthToken.js';
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
@@ -46,9 +48,10 @@ const Auth = () => {
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const token = res?.tokenId;
+   
         try {
             dispatch({
-                type: "AUTH",
+                type: AUTH,
                 data: { result, token }
             })
             history.push('/')
