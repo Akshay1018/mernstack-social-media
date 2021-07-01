@@ -68,7 +68,7 @@ export const updatepost = (id, postData) => async (dispatch) => {
     }
 }
 
-export const deletePost = (id) => async (req,dispatch) => {
+export const deletePost = (id) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
