@@ -14,14 +14,6 @@ const Navbar = () => {
     const history = useHistory();
     const location = useLocation();
 
-    // const logout = () => {
-    //     dispatch({ type: actionType.LOGOUT });
-
-    //     history.push('/auth');
-
-    //     setUser(null);
-    //   };
-
     useEffect(() => {
         const token = user?.token;
         if (token) {
