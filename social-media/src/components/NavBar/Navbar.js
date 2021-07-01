@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core'
 import useStyles from './style';
 import memories from '../../components/images/memory.jpg';
-import { Link ,useHistory,useLocation} from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../types';
 import decode from 'jwt-decode';
@@ -16,35 +16,32 @@ const Navbar = () => {
 
     // const logout = () => {
     //     dispatch({ type: actionType.LOGOUT });
-    
+
     //     history.push('/auth');
-    
+
     //     setUser(null);
     //   };
 
     useEffect(() => {
-        // const token = user?.token;
-        // if(token){
-           
-        //     if (token.exp * 1000 < new Date().getTime()) logout();
-        // }
+        const token = user?.token;
+        if (token) {
+            if (token.exp * 1000 < new Date().getTime()) logout();
+        }
         setUser(JSON.parse(localStorage.getItem('token')));
     }, [location]);
 
-    const logout = ()=>{
+    const logout = () => {
         dispatch({
-            type:LOGOUT
+            type: LOGOUT
         });
         history.push('/');
-        setUser(null)
+        setUser(null);
     }
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
                 <Typography component={Link} to='/' className={classes.heading} variant="h2" align='center'>
-
-
-                    Recapture
+                    Recapture 🌄
                 </Typography>
                 <img className={classes.image} src={memories} alt='memories' height='60' />
 

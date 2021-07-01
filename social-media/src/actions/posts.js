@@ -9,7 +9,6 @@ export const getPosts = () => async (dispatch) => {
             "Content-Type": "application/json"
         }
     };
-
     try {
         const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts',config);
         dispatch({
@@ -41,9 +40,6 @@ export const createPost = (postm) => async (dispatch) => {
             type: CREATE,
             payload: data
         })
-        
-      
-
     } catch (err) {
         console.log(err.message);
     }
@@ -79,7 +75,7 @@ export const deletePost = (id) => async (req,dispatch) => {
         }
     };
     if (localStorage.token) {
-        let tok = ` ${JSON.parse(localStorage.getItem('token')).token}`;
+        let tok = `${JSON.parse(localStorage.getItem('token')).token}`;
      
         AuthToken(tok);
     }
@@ -89,7 +85,7 @@ export const deletePost = (id) => async (req,dispatch) => {
             type: DELETE,
             payload: id
         })
-      
+       
     } catch (err) {
         console.log(err.message);
     }
