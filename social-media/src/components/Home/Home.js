@@ -1,31 +1,47 @@
 import React, { useState, useEffect } from 'react'
-import {Paper, Container, Grid, Grow } from '@material-ui/core';
+import { Paper, Container, Grid, Grow, AppBar, TextField, Button } from '@material-ui/core';
+import { useHistory, useLocation } from 'react-router-dom';
+import ChipInput from 'material-ui-chip-input';
 import Posts from '../posts';
 import Form from '../form';
 import { getPosts } from '../../actions/posts'
 import { useDispatch } from 'react-redux';
 import Paginate from '../Pagination/Pagination'
+import { classes } from 'istanbul-lib-coverage';
 
-
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 const Home = () => {
     const [currentId, setcurrentId] = useState(0);
     const dispatch = useDispatch();
+    const query = useQuery();
+    const history = useHistory();
 
+    const page = query.get('page') || 1;
+    const serchQuery = query.get('serchQuery')
     useEffect(() => {
         dispatch(getPosts());
     }, [currentId, dispatch]);
     return (
 
         <Grow in>
-            <Container>
-                <Grid container justify='space-between' alignItems='stretch' spacing={3}>
-                    <Grid item xs={12} sm={7}>
+            <Container maxWidth='xl'>
+                <Grid container justify='space-between' alignItems='stretch' spacing={3} className={classes.gridContainer}>
+                    <Grid item xs={12} sm={6} md={9}>
                         <Posts setcurrentId={setcurrentId} />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <AppBar className = {classes.appBarSearch} position = "static" color = 'inherit'>
+                            <TextField
+                                name = "search"
+                                variant= "outlined"
+                                label = "Search posts"
+                            />
+                        </AppBar>
                         <Form currentId={currentId} setcurrentId={setcurrentId} />
-                        <Paper  elevation = {6}>
-                                <Paginate/>
+                        <Paper elevation={6}>
+                            <Paginate />
                         </Paper>
                     </Grid>
 
