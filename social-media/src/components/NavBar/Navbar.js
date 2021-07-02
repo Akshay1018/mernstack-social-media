@@ -45,11 +45,11 @@ const Navbar = () => {
                             {user?.result.name.charAt(0)}
                         </Avatar>
                         <Typography className={classes.userName} variant="h6" >{user.result.name}</Typography>
-                        <Button className={classes.logout} varient="contained" color='secondary' onClick={logout}>Logout</Button>
+                        <Button className={classes.logout} variant="contained" color='secondary' onClick={logout}>Logout</Button>
 
                     </div>
                 ) : (
-                    <Button component={Link} to='/auth' varient="contained" color="primary">Sign_in</Button>
+                    <Button component={Link} to='/auth' variant="contained" color="primary">Sign_in</Button>
                 )}
             </Toolbar>
 

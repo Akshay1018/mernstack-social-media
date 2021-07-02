@@ -31,15 +31,20 @@ const Home = () => {
 
     const handleKeyPress = (e) => {
         if (e.keyCode === 13) {
-
+            searchPost();
         }
     }
-    const handleAdd = (tag) => {
-        setTag([...tag, tag])
-    }
-    const handleDelete = (tagTodelete) => {
-        setTag(tag.filter((tag) => tag !== tagTodelete));
+    const handleAdd = (t) => setTag([...tag, t])
 
+    const handleDelete = (tagTodelete) => {
+        setTag(tag.filter((t) => t !== tagTodelete));
+    }
+    const searchPost = () => {
+        if (search.trim()) {
+            //dispatch
+        } else {
+            history.push('/');
+        }
     }
 
     return (
@@ -69,6 +74,7 @@ const Home = () => {
                                 variant="outlined"
                                 label="Search Tags"
                             />
+                            <Button onClick={searchPost} className={classes.searchButton} variant='contained' color="primary">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setcurrentId={setcurrentId} />
                         <Paper elevation={6}>
