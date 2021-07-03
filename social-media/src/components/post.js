@@ -14,7 +14,7 @@ const Post = ({ post, setcurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('token'));
 
-   
+
     const AllLikes = () => {
         if (post.likes.length > 0) {
             return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
@@ -30,7 +30,7 @@ const Post = ({ post, setcurrentId }) => {
 
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} raised elevation={6}>
             <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
             <div className={classes.overlay}>
                 <Typography variant='h6'>{post.name}</Typography>
@@ -43,7 +43,7 @@ const Post = ({ post, setcurrentId }) => {
 
                 <div className={classes.overlay2}>
                     <Button style={{ color: 'white' }} size='small'
-                      onClick={() => setcurrentId(post._id)}
+                        onClick={() => setcurrentId(post._id)}
                     >
                         <HorizIcon fontSize='default' />
                     </Button>
@@ -65,7 +65,7 @@ const Post = ({ post, setcurrentId }) => {
                     <AllLikes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size='small' color='primary'  onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size='small' color='primary' onClick={() => dispatch(deletePost(post._id))}>
                         <Deleteicon fontSize='small' />
                         Delete
                     </Button>

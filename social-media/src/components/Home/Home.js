@@ -42,6 +42,7 @@ const Home = () => {
     const searchPost = () => {
         if (search.trim() || tag) {
             dispatch(getPostBySearch({ search, tag: tag.join(',') }));
+            history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tag.join(',')}`)
         } else {
             history.push('/');
         }

@@ -1,5 +1,5 @@
 
-import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST } from '../types'
+import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST,FETCH_BY_SEARCH} from '../types'
 import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
@@ -29,7 +29,10 @@ export const getPostBySearch = (searchQuery) => async (dispatch) => {
     };
     try {
         const { data: { data } } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/posts/search?searchQuery=${searchQuery.search || 'none'}&tag=${searchQuery.tag}`);
-        console.log(data);
+        dispatch({
+            type: FETCH_BY_SEARCH,
+            payload: data
+        });
 
     } catch (err) {
         console.log(err.message);
