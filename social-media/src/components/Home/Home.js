@@ -7,7 +7,7 @@ import Form from '../form';
 import { getPosts, getPostBySearch } from '../../actions/posts'
 import { useDispatch } from 'react-redux';
 import Paginate from '../Pagination/Pagination'
-import { classes } from 'istanbul-lib-coverage';
+
 import useStyles from './styles';
 
 function useQuery() {
@@ -21,7 +21,7 @@ const Home = () => {
     const classes = useStyles();
 
     const page = query.get('page') || 1;
-    const serchQuery = query.get('serchQuery')
+    const searchQuery = query.get('serchQuery')
     const [search, setSearch] = useState('');
     const [tag, setTag] = useState([]);
 
@@ -78,9 +78,12 @@ const Home = () => {
                             <Button onClick={searchPost} className={classes.searchButton} variant='contained' color="primary">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setcurrentId={setcurrentId} />
-                        <Paper elevation={6}>
+                        {(!searchQuery && !tag.length) &&(
+                            <Paper elevation={6} className = {classes.pagination}>
                             <Paginate page = {page} />
                         </Paper>
+                        )}
+                        
                     </Grid>
 
                 </Grid>

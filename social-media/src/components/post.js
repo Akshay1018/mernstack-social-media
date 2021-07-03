@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from '../styles'
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import Deleteicon from '@material-ui/icons/Delete';
 import HorizIcon from '@material-ui/icons/MoreHoriz';
@@ -8,13 +8,15 @@ import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined'
 import moment from 'moment';
 import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../actions/posts';
+import { useHistory } from 'react-router-dom'
 
 const Post = ({ post, setcurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = JSON.parse(localStorage.getItem('token'));
 
-
+    const openPost = () => history.push(`/posts/${post._id}`)
     const AllLikes = () => {
         if (post.likes.length > 0) {
             return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
@@ -31,34 +33,38 @@ const Post = ({ post, setcurrentId }) => {
 
     return (
         <Card className={classes.card} raised elevation={6}>
-            <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-            <div className={classes.overlay}>
-                <Typography variant='h6'>{post.name}</Typography>
-
-                <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
-
-            </div>
-            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+            <ButtonBase className={classes.cardAction} onClick={openPost}>
 
 
-                <div className={classes.overlay2}>
-                    <Button style={{ color: 'white' }} size='small'
-                        onClick={() => setcurrentId(post._id)}
-                    >
-                        <HorizIcon fontSize='default' />
-                    </Button>
+                <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+                <div className={classes.overlay}>
+                    <Typography variant='h6'>{post.name}</Typography>
+
+                    <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
 
                 </div>
-            )}
-            <div className={classes.details}>
-                <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
-            </div>
-            <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
 
-            <CardContent>
-                <Typography variant='body2' color='textSecondary' component='p'>{post.message}</Typography>
 
-            </CardContent>
+                    <div className={classes.overlay2}>
+                        <Button style={{ color: 'white' }} size='small'
+                            onClick={() => setcurrentId(post._id)}
+                        >
+                            <HorizIcon fontSize='default' />
+                        </Button>
+
+                    </div>
+                )}
+                <div className={classes.details}>
+                    <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
+                </div>
+                <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
+
+                <CardContent>
+                    <Typography variant='body2' color='textSecondary' component='p'>{post.message}</Typography>
+
+                </CardContent>
+            </ButtonBase>
             <CardActions className={classes.cardActions}>
 
                 <Button size='small' color='primary' disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>

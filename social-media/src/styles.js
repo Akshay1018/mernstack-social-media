@@ -35,6 +35,8 @@ export default makeStyles((theme) => ({
     buttonSubmit: {
         marginBottom: 10,
     },
+
+    /////////////
     media: {
         height: 0,
         paddingTop: '56.25%',
@@ -83,23 +85,10 @@ export default makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
-    mainContainer: {
-        display: 'flex',
-        alignItems: 'center',
-
-    },
-    [theme.breakpoints.down('sm')]: {
-        mainContainer: {
-            flexDirection: 'column-reverse'
-        }
-    },
-    smMargin: {
-        margin: theme.spacing(1),
-    },
-    actionDiv: {
-        textAlign: 'center',
+    cardAction: {
+        display: 'block',
+        textAlign: 'initial',
     },
 
 
-    
 }));

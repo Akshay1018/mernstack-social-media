@@ -1,5 +1,5 @@
 
-import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING } from '../types'
+import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING,FETCH_POST} from '../types'
 import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
@@ -12,13 +12,34 @@ export const getPosts = (page) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         const { data } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/getposts?page=${page}`, config);
-        console.log(data);
+     
         dispatch({
             type: FETCH_ALL,
             payload: data
         });
         dispatch({ type: END_LOADING });
 
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
+export const getPost = (id) =>async(dispatch)=>{
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/getpost/${id}`, config);
+        dispatch({
+            type: FETCH_POST,
+            payload: data
+        });
+        dispatch({ type: END_LOADING });
+
+        
     } catch (err) {
         console.log(err.message);
     }
