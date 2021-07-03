@@ -40,7 +40,7 @@ const Home = () => {
         setTag(tag.filter((t) => t !== tagTodelete));
     }
     const searchPost = () => {
-        if (search.trim()) {
+        if (search.trim() || tag) {
             dispatch(getPostBySearch({ search, tag: tag.join(',') }));
         } else {
             history.push('/');
@@ -64,7 +64,7 @@ const Home = () => {
                                 fullWidth
                                 onKeyPress={handleKeyPress}
                                 value={search}
-                                onchange={(e) => setSearch(e.target.value)}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                             <ChipInput
                                 style={{ margin: '10px 0' }}
