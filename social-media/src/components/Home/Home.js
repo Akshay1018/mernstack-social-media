@@ -25,9 +25,9 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [tag, setTag] = useState([]);
 
-    useEffect(() => {
-        dispatch(getPosts());
-    }, [currentId, dispatch]);
+    // useEffect(() => {
+    //     dispatch(getPosts());
+    // }, [currentId, dispatch]);
 
     const handleKeyPress = (e) => {
         if (e.keyCode === 13) {
@@ -79,7 +79,7 @@ const Home = () => {
                         </AppBar>
                         <Form currentId={currentId} setcurrentId={setcurrentId} />
                         <Paper elevation={6}>
-                            <Paginate />
+                            <Paginate page = {page} />
                         </Paper>
                     </Grid>
 

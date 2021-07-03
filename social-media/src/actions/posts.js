@@ -3,14 +3,14 @@ import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST,FETCH_BY_SEARCH} from '../
 import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
         }
     };
     try {
-        const { data } = await axios.get('https://intense-reaches-30417.herokuapp.com/api/user/getposts', config);
+        const { data } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/getposts?page=${page}`, config);
         dispatch({
             type: FETCH_ALL,
             payload: data
