@@ -1,5 +1,5 @@
 
-import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST,FETCH_BY_SEARCH} from '../types'
+import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING } from '../types'
 import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
@@ -10,11 +10,14 @@ export const getPosts = (page) => async (dispatch) => {
         }
     };
     try {
+        dispatch({ type: START_LOADING });
         const { data } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/getposts?page=${page}`, config);
+        console.log(data);
         dispatch({
             type: FETCH_ALL,
             payload: data
         });
+        dispatch({ type: END_LOADING });
 
     } catch (err) {
         console.log(err.message);
@@ -28,11 +31,13 @@ export const getPostBySearch = (searchQuery) => async (dispatch) => {
         }
     };
     try {
+        dispatch({ type: START_LOADING });
         const { data: { data } } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/posts/search?searchQuery=${searchQuery.search || 'none'}&tag=${searchQuery.tag}`);
         dispatch({
             type: FETCH_BY_SEARCH,
-            payload: data
+            payload: {data}
         });
+        dispatch({ type: END_LOADING });
 
     } catch (err) {
         console.log(err.message);
@@ -52,12 +57,14 @@ export const createPost = (postm) => async (dispatch) => {
     }
 
     try {
+        dispatch({ type: START_LOADING });
         const { data } = await axios.post('https://intense-reaches-30417.herokuapp.com/api/user/createpost', postm, config);
 
         dispatch({
             type: CREATE,
             payload: data
         })
+        dispatch({ type: END_LOADING });
     } catch (err) {
         console.log(err.message);
     }
