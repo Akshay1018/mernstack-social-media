@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
+   
     heading: {
         color: 'rgba(255, 99, 71, 0.6)'
     },
@@ -36,6 +37,10 @@ export default makeStyles((theme) => ({
         marginBottom: 10,
     },
 
+
+
+
+    
     /////////////
     media: {
         height: 0,
