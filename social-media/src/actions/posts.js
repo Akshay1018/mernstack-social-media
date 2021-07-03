@@ -21,6 +21,21 @@ export const getPosts = () => async (dispatch) => {
     }
 }
 
+export const getPostBySearch = (searchQuery) => async (dispatch)=>{
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    try {
+        const {data} = await axios.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tag=${searchQuery.tag}`);
+        console.log(data);
+        
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 export const createPost = (postm) => async (dispatch) => {
     const config = {
         headers: {

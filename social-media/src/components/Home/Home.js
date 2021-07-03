@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import Posts from '../posts';
 import Form from '../form';
-import { getPosts } from '../../actions/posts'
+import { getPosts, getPostBySearch } from '../../actions/posts'
 import { useDispatch } from 'react-redux';
 import Paginate from '../Pagination/Pagination'
 import { classes } from 'istanbul-lib-coverage';
@@ -41,7 +41,7 @@ const Home = () => {
     }
     const searchPost = () => {
         if (search.trim()) {
-            //dispatch
+            dispatch(getPostBySearch({ search, tag: tag.join(',') }));
         } else {
             history.push('/');
         }
