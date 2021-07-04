@@ -10,6 +10,7 @@ const Paginate = ({page})=> {
     const {numberOfPages} = useSelector((state)=>state.posts)
     useEffect(()=>{
         if(page) dispatch(getPosts(page));
+        // eslint-disable-next-line
     },[page])
     return (
         <Pagination

@@ -48,7 +48,7 @@ const Post = ({ post, setcurrentId }) => {
 
                     <div className={classes.overlay2}>
                         <Button style={{ color: 'white' }} size='small'
-                            onClick={() => setcurrentId(post._id)}
+                            onClick={(e) => { e.stopPropagation(); setcurrentId(post._id)}}
                         >
                             <HorizIcon fontSize='default' />
                         </Button>
@@ -71,7 +71,7 @@ const Post = ({ post, setcurrentId }) => {
                     <AllLikes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size='small' color='primary' onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size='small'  color='secondary' onClick={() => dispatch(deletePost(post._id))}>
                         <Deleteicon fontSize='small' />
                         Delete
                     </Button>

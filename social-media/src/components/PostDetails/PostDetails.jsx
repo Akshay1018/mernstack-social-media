@@ -18,12 +18,14 @@ const PostDetails = () => {
   const { id } = useParams();
   useEffect(() => {
     dispatch(getPost(id));
+    // eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
     if (post) {
       dispatch(getPostBySearch({ search: "none", tag: post?.tags.join(",") }));
     }
+    // eslint-disable-next-line
   }, [post]);
 
   if (!post) {
@@ -80,12 +82,13 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {recommendedPosts.length && (
+      {!!recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
-            {" "}
+           
             You might also like:
           </Typography>
+          
           <Divider />
           <div className={classes.recommendedPosts}>
             {recommendedPosts.map(
@@ -107,7 +110,8 @@ const PostDetails = () => {
                   <Typography gutterBottom variant="subtitle1">
                     Likes: {likes.length}
                   </Typography>
-                  <img src={selectedFile} width="200px" />
+                
+                  <img src={selectedFile} width="200px" alt = "post Img" />  
                 </div>
               )
             )}

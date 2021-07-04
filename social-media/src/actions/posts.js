@@ -46,11 +46,7 @@ export const getPost = (id) =>async(dispatch)=>{
 }
 
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
-    const config = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
+    
     try {
         dispatch({ type: START_LOADING });
         const { data: { data } } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/posts/search?searchQuery=${searchQuery.search || 'none'}&tag=${searchQuery.tag}`);
@@ -65,7 +61,7 @@ export const getPostBySearch = (searchQuery) => async (dispatch) => {
     }
 }
 
-export const createPost = (postm) => async (dispatch) => {
+export const createPost = (postm,history) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -80,7 +76,7 @@ export const createPost = (postm) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         const { data } = await axios.post('https://intense-reaches-30417.herokuapp.com/api/user/createpost', postm, config);
-
+        history.push(`/posts/${data._id}`)
         dispatch({
             type: CREATE,
             payload: data

@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SignIn, SignUp } from '../../actions/auth';
 import { AUTH } from '../../types';
-import AuthToken from '../../AuthToken.js';
+
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {

@@ -8,7 +8,7 @@ import PostDetails from './components/PostDetails/PostDetails';
 import { Route, BrowserRouter, Switch,Redirect } from 'react-router-dom';
 import Auth from './components/auth/Auth';
 function App() {
-    const user = JSON.parse(localStorage.getItem('token'))
+    //const user = JSON.parse(localStorage.getItem('token'))
     return (
         
             <BrowserRouter>
