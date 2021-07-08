@@ -84,12 +84,13 @@ const PostDetails = () => {
       </div>
       {!!recommendedPosts.length && (
         <div className={classes.section}>
+           <Divider />
           <Typography gutterBottom variant="h5">
            
             You might also like:
           </Typography>
           
-          <Divider />
+         
           <div className={classes.recommendedPosts}>
             {recommendedPosts.map(
               ({ title, message, name, selectedFile, _id ,likes}) => (

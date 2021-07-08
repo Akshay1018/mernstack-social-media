@@ -25,10 +25,6 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [tag, setTag] = useState([]);
 
-    // useEffect(() => {
-    //     dispatch(getPosts());
-    // }, [currentId, dispatch]);
-
     const handleKeyPress = (e) => {
         if (e.keyCode === 13) {
             searchPost();
