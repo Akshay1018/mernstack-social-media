@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_POST } from '../types'
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_POST,COMMENT } from '../types'
 
 const reducer = (state = { isLoading: true, posts: [] }, action) => {
     switch (action.type) {
@@ -33,6 +33,18 @@ const reducer = (state = { isLoading: true, posts: [] }, action) => {
 
         case LIKE_POST:
             return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };
+
+
+        case COMMENT:
+            return {
+                ...state, 
+                posts:state?.posts.map((post)=>{
+                    if(post._id === action.payload._id ){
+                        return action.payload;
+                    }
+                    return post;
+                })
+            }
         default:
             return state;
     }

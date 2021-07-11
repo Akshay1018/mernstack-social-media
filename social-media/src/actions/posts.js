@@ -1,5 +1,5 @@
 
-import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING,FETCH_POST} from '../types'
+import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE_POST, FETCH_BY_SEARCH, START_LOADING, END_LOADING, FETCH_POST, COMMENT } from '../types'
 import axios from 'axios';
 import AuthToken from '../AuthToken.js';
 
@@ -12,7 +12,7 @@ export const getPosts = (page) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         const { data } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/getposts?page=${page}`, config);
-     
+
         dispatch({
             type: FETCH_ALL,
             payload: data
@@ -24,7 +24,7 @@ export const getPosts = (page) => async (dispatch) => {
     }
 }
 
-export const getPost = (id) =>async(dispatch)=>{
+export const getPost = (id) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -39,20 +39,20 @@ export const getPost = (id) =>async(dispatch)=>{
         });
         dispatch({ type: END_LOADING });
 
-        
+
     } catch (err) {
         console.log(err.message);
     }
 }
 
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
-    
+
     try {
         dispatch({ type: START_LOADING });
         const { data: { data } } = await axios.get(`https://intense-reaches-30417.herokuapp.com/api/user/posts/search?searchQuery=${searchQuery.search || 'none'}&tag=${searchQuery.tag}`);
         dispatch({
             type: FETCH_BY_SEARCH,
-            payload: {data}
+            payload: { data }
         });
         dispatch({ type: END_LOADING });
 
@@ -61,7 +61,7 @@ export const getPostBySearch = (searchQuery) => async (dispatch) => {
     }
 }
 
-export const createPost = (postm,history) => async (dispatch) => {
+export const createPost = (postm, history) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -158,6 +158,28 @@ export const likePost = (id) => async (dispatch) => {
         console.log(err);
     }
 }
-export const postComment=() => async(dispatch)=>{
+export const postComment = (val, id) => async (dispatch) => {
 
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    let tok = `${JSON.parse(localStorage.getItem('token')).token}`;
+
+    if (localStorage.token) {
+        AuthToken(tok);
+    }
+    try {
+        const { data } = await axios.post(`https://intense-reaches-30417.herokuapp.com/api/user/commentPost/${id}`, { val }, config);
+        dispatch({
+            type: COMMENT,
+            payload: data
+        });
+        return data.comments;
+
+    } catch (err) {
+        console.log(err);
+    }
 }
