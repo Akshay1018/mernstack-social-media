@@ -72,6 +72,7 @@ const PostDetails = () => {
           <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
           <Divider style={{ margin: '20px 0' }} /> */}
           <CommentSection post = {post}/>
+          
         </div>
         <div className={classes.imageSection}>
           <img
