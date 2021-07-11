@@ -158,3 +158,6 @@ export const likePost = (id) => async (dispatch) => {
         console.log(err);
     }
 }
+export const postComment=() => async(dispatch)=>{
+
+}
