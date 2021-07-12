@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-
+import { deepPurple } from '@material-ui/core/colors';
 export default makeStyles((theme) => ({
     appBar: {
         borderRadius: 15,
@@ -9,18 +9,56 @@ export default makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-   
+    actionDiv: {
+        textAlign: 'center',
+      },
+    mainContainer: {
+        borderRadius: 15,
+        margin: '30px 0',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px 50px',
+        height: '40vh'
+    },
+    toolbar: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        width: '400px',
+    },
+    profile: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '400px',
+    },
+    userName: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+
     heading: {
         color: 'rgba(255, 99, 71, 0.6)'
     },
     image: {
         marginLeft: '15px',
     },
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-        },
-    },
+    // root: {
+    //     '& .MuiTextField-root': {
+    //         margin: theme.spacing(1),
+    //     },
+    // },
+    brandContainer: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+      smMargin: {
+        margin: theme.spacing(1),
+      },
+      purple: {
+        color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
+      },
     paper: {
         padding: theme.spacing(2),
     },
@@ -37,10 +75,28 @@ export default makeStyles((theme) => ({
         marginBottom: 10,
     },
 
+    [theme.breakpoints.down('sm')]: {
+        appBar: {
+          padding: '10px 20px',
+        },
+        heading: {
+          display: 'none',
+        },
+        userName: {
+          display: 'none',
+        },
+        image: {
+          marginLeft: '5px',
+        },
+        toolbar: {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '160px',
+        },
+      },
 
 
 
-    
     /////////////
     media: {
         height: 0,
