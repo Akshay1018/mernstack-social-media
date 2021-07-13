@@ -14,14 +14,14 @@ const Navbar = () => {
     const history = useHistory();
     const location = useLocation();
 
-    // useEffect(() => {
-    //     const token = user?.token;
-    //     if (token) {
-    //         if (token.exp * 1000 < new Date().getTime()) logout();
-    //     }
-    //     setUser(JSON.parse(localStorage.getItem('token')));
-    //     // eslint-disable-next-line
-    // }, [location,user?.token]);
+    useEffect(() => {
+        const token = user?.token;
+        if (token) {
+            if (token.exp * 1000 < new Date().getTime()) logout();
+        }
+        setUser(JSON.parse(localStorage.getItem('token')));
+        // eslint-disable-next-line
+    }, [location,user?.token]);
 
     const logout = () => {
         dispatch({
