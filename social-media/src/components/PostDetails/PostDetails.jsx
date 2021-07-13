@@ -90,7 +90,7 @@ const PostDetails = () => {
            <Divider />
           <Typography gutterBottom variant="h5">
            
-            You might also like:
+           <strong>You might also like:</strong> 
           </Typography>
           
          

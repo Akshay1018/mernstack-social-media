@@ -61,7 +61,7 @@ const Post = ({ post, setcurrentId }) => {
                 <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
 
                 <CardContent>
-                    <Typography variant='body2' color='textSecondary' component='p'>{post.message}</Typography>
+                    <Typography variant='body2' color='textSecondary' component='p'>{post.message.substring(0,50)+"..."}</Typography>
 
                 </CardContent>
             </ButtonBase>

@@ -117,6 +117,7 @@ export default makeStyles((theme) => ({
         borderRadius: '15px',
         height: '100%',
         position: 'relative',
+       
     },
     overlay: {
         position: 'absolute',
