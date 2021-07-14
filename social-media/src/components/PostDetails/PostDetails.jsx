@@ -5,18 +5,21 @@ import {
   CircularProgress,
   Divider,
 } from "@material-ui/core";
+import { TwitterShareButton, TwitterIcon, FacebookShareButton,FacebookIcon,WhatsappShareButton,WhatsappIcon } from "react-share";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams, useHistory } from "react-router-dom";
 import { getPost, getPostBySearch } from "../../actions/posts";
-import CommentSection from './CommentSection';
+import CommentSection from "./CommentSection";
 import useStyles from "./styles";
+
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
+  let urlshare = `http://localhost:3000/posts/${id}`
   useEffect(() => {
     dispatch(getPost(id));
     // eslint-disable-next-line
@@ -40,7 +43,10 @@ const PostDetails = () => {
       </Paper>
     );
   }
+  // const handleClick = () => {
 
+  //   <Link to ="https://twitter.com/intent/tweet?url=https%3A%2F%2Fparse.com" rel="noopener"></Link>;
+  // };
   const openPost = (_id) => history.push(`/posts/${_id}`);
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
@@ -67,12 +73,44 @@ const PostDetails = () => {
             {moment(post.createdAt).fromNow()}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
+          <Typography gutterBottom variant="h5">
+            <strong>Share : </strong>
+          </Typography>
+          <TwitterShareButton 
+          title={post.title}
+          url = {urlshare} >
+             <TwitterIcon size={32} round />
+          </TwitterShareButton>
+          <FacebookShareButton
+          >
+          
+          </FacebookShareButton>
+          {/* <Button
+           style={{ marginTop: "10px" }}
+           
+            size="small"
+            onClick={handleClick}
+          >
+            <TwitterIcon
+              style={{ marginTop: "10px" }}
+              variant="contained"
+              color="primary"
+              size="small"
+            
+              // href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fparse.com"
+              // rel="noopener"
+            >
+              {/* <i class="fab fa-2x fa-twitter"></i> */}
+          {/* </TwitterIcon> */}
+
+          {/* </Button> */}
+
+          <Divider style={{ margin: "20px 0" }} />
           {/* <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
           <Divider style={{ margin: '20px 0' }} />
           <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
           <Divider style={{ margin: '20px 0' }} /> */}
-          <CommentSection post = {post}/>
-          
+          <CommentSection post={post} />
         </div>
         <div className={classes.imageSection}>
           <img
@@ -87,16 +125,14 @@ const PostDetails = () => {
       </div>
       {!!recommendedPosts.length && (
         <div className={classes.section}>
-           <Divider />
+          <Divider />
           <Typography gutterBottom variant="h5">
-           
-           <strong>You might also like:</strong> 
+            <strong>You might also like:</strong>
           </Typography>
-          
-         
+
           <div className={classes.recommendedPosts}>
             {recommendedPosts.map(
-              ({ title, message, name, selectedFile, _id ,likes}) => (
+              ({ title, message, name, selectedFile, _id, likes }) => (
                 <div
                   style={{ margin: "20px", cursor: "pointer" }}
                   onClick={() => openPost(_id)}
@@ -114,8 +150,8 @@ const PostDetails = () => {
                   <Typography gutterBottom variant="subtitle1">
                     Likes: {likes.length}
                   </Typography>
-                
-                  <img src={selectedFile} width="200px" alt = "post Img" />  
+
+                  <img src={selectedFile} width="200px" alt="post Img" />
                 </div>
               )
             )}

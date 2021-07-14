@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../actions/posts';
 import { useHistory } from 'react-router-dom'
 
+
 const Post = ({ post, setcurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const Post = ({ post, setcurrentId }) => {
 
                     <div className={classes.overlay2}>
                         <Button style={{ color: 'white' }} size='small'
-                            onClick={(e) => { e.stopPropagation(); setcurrentId(post._id)}}
+                            onClick={(e) => { e.stopPropagation(); setcurrentId(post._id) }}
                         >
                             <HorizIcon fontSize='default' />
                         </Button>
@@ -61,9 +62,10 @@ const Post = ({ post, setcurrentId }) => {
                 <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
 
                 <CardContent>
-                    <Typography variant='body2' color='textSecondary' component='p'>{post.message.substring(0,50)+"..."}</Typography>
+                    <Typography variant='body2' color='textSecondary' component='p'>{post.message.substring(0, 50) + "..."}</Typography>
 
                 </CardContent>
+              
             </ButtonBase>
             <CardActions className={classes.cardActions}>
 
@@ -71,7 +73,7 @@ const Post = ({ post, setcurrentId }) => {
                     <AllLikes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size='small'  color='secondary' onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size='small' color='secondary' onClick={() => dispatch(deletePost(post._id))}>
                         <Deleteicon fontSize='small' />
                         Delete
                     </Button>
