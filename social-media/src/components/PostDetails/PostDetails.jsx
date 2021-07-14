@@ -88,6 +88,12 @@ const PostDetails = () => {
             <FacebookIcon size={32} round />
           
           </FacebookShareButton>
+          <WhatsappShareButton
+          title={post.title}
+          url = {urlshare}>
+            <WhatsappIcon size={32} round />
+
+          </WhatsappShareButton>
           {/* <Button
            style={{ marginTop: "10px" }}
            
