@@ -82,7 +82,10 @@ const PostDetails = () => {
              <TwitterIcon size={32} round />
           </TwitterShareButton>
           <FacebookShareButton
+          title={post.title}
+          url = {urlshare}
           >
+            <FacebookIcon size={32} round />
           
           </FacebookShareButton>
           {/* <Button
