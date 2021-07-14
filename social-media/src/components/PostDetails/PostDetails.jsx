@@ -19,7 +19,7 @@ const PostDetails = () => {
   const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
-  let urlshare = `http://localhost:3000/posts/${id}`
+  let urlshare = `https://blog-me.netlify.app/posts/${id}`
   useEffect(() => {
     dispatch(getPost(id));
     // eslint-disable-next-line
@@ -94,25 +94,7 @@ const PostDetails = () => {
             <WhatsappIcon size={32} round />
 
           </WhatsappShareButton>
-          {/* <Button
-           style={{ marginTop: "10px" }}
-           
-            size="small"
-            onClick={handleClick}
-          >
-            <TwitterIcon
-              style={{ marginTop: "10px" }}
-              variant="contained"
-              color="primary"
-              size="small"
-            
-              // href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fparse.com"
-              // rel="noopener"
-            >
-              {/* <i class="fab fa-2x fa-twitter"></i> */}
-          {/* </TwitterIcon> */}
-
-          {/* </Button> */}
+         
 
           <Divider style={{ margin: "20px 0" }} />
           {/* <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
