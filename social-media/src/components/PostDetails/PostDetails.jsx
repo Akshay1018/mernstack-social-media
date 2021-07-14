@@ -79,19 +79,19 @@ const PostDetails = () => {
           <TwitterShareButton 
           title={post.title}
           url = {urlshare} >
-             <TwitterIcon size={32} round />
+             <TwitterIcon size={32} round style={{margin : "0 5px"}} />
           </TwitterShareButton>
           <FacebookShareButton
           title={post.title}
           url = {urlshare}
           >
-            <FacebookIcon size={32} round />
+            <FacebookIcon size={32} round style={{margin : "0 5px"}} />
           
           </FacebookShareButton>
           <WhatsappShareButton
           title={post.title}
           url = {urlshare}>
-            <WhatsappIcon size={32} round />
+            <WhatsappIcon size={32} round style={{margin : "0 5px"}}/>
 
           </WhatsappShareButton>
          
