@@ -43,10 +43,7 @@ const PostDetails = () => {
       </Paper>
     );
   }
-  // const handleClick = () => {
-
-  //   <Link to ="https://twitter.com/intent/tweet?url=https%3A%2F%2Fparse.com" rel="noopener"></Link>;
-  // };
+  
   const openPost = (_id) => history.push(`/posts/${_id}`);
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
@@ -97,10 +94,7 @@ const PostDetails = () => {
          
 
           <Divider style={{ margin: "20px 0" }} />
-          {/* <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
-          <Divider style={{ margin: '20px 0' }} /> */}
+        
           <CommentSection post={post} />
         </div>
         <div className={classes.imageSection}>
